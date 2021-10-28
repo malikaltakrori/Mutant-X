@@ -40,7 +40,7 @@ def averageCharacterPerWord(inputText):
     inputText = inputText.lower().replace(" ", "")
     charCount = len(str(inputText))
 
-    avgCharCount = charCount / len(words)
+    avgCharCount = (charCount / len(words)) if len(words) > 0 else 0
     return avgCharCount
 
 
@@ -65,7 +65,7 @@ def frequencyOfLetters(inputText):
     totalCount = sum(list(charsFrequencyDict.values()))
     for c in range(0, len(characters)):
         char = characters[c]
-        vectorOfFrequencies[c] = charsFrequencyDict[char] / totalCount
+        vectorOfFrequencies[c] = charsFrequencyDict[char] / totalCount if totalCount >0 else 0
 
     return vectorOfFrequencies
 
@@ -95,7 +95,7 @@ def mostCommonLetterBigrams(inputText):
 
     bigramsFrequency = []
     for t in bigrams:
-        bigramsFrequency.append(float(bigramCounts[t] / totalCount))
+        bigramsFrequency.append(float(bigramCounts[t] / totalCount) if totalCount >0 else 0)
 
     return bigramsFrequency
 
@@ -123,7 +123,7 @@ def mostCommonLetterTrigrams(inputText):
 
     trigramsFrequency = []
     for t in trigrams:
-        trigramsFrequency.append(float(trigramCounts[t] / totalCount))
+        trigramsFrequency.append(float(trigramCounts[t] / totalCount) if totalCount != 0 else 0)
 
     return trigramsFrequency
 
@@ -372,5 +372,5 @@ def calculateFeatures(inputText):
     ## GROUP 11
     featureList.extend(frequencyOfPunctuationCharacters(inputText))
 
-    return featureList
+    return [np.float32(x) for x in featureList]
 ######################################## TRAINING CLASSIFIER ###########################

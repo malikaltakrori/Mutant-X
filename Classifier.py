@@ -90,6 +90,7 @@ def getAllData(datasetName, authorsRequired):
         y_test.append(authorId)
 
     return X_train, X_test, y_train, y_test
+
 class Classifier:
 
     def __init__(self, classifierType, authorstoKeep, datasetName, documentName):
@@ -152,3 +153,4 @@ class Classifier:
                 list(self.clf.predict_proba([np.array(data), np.array(data)])[0]))}
 
             document.documentAuthor, _ = max(document.documentAuthorProbabilites.items(), key=lambda x: x[1])
+
